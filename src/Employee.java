@@ -2,7 +2,7 @@ class Employee {
     private String name;
     private int department;
     private double salary;
-    final private int id;
+    private final int id;
     private static int nextId = 1;
 
     public Employee(String name, int department, double salary) {

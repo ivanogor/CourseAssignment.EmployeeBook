@@ -11,7 +11,6 @@ class EmployeeBook {
         int index = find(id);
         if (index >= 0) {
             employees[index] = null;
-
         }
     }
 
@@ -24,12 +23,15 @@ class EmployeeBook {
     }
 
     public void insert(Employee employee) {
+        boolean succes = false;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] == null) {
                 employees[i] = employee;
+                succes = true;
                 break;
             }
         }
+        System.out.println(succes ? "Сотрудник вставлен" : "Не удалось вставить сотрудника");
     }
 
     public void changeSalary(String name, double newSalary) {
@@ -49,11 +51,11 @@ class EmployeeBook {
     public int find(String name) {
         int index = -1;
         name = name.toLowerCase();
-        for (Employee employee : employees) {
-            if (employee != null) {
-                String nameInBase = employee.getName().toLowerCase();
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null) {
+                String nameInBase = employees[i].getName().toLowerCase();
                 if (name.equals(nameInBase)) {
-                    index = employee.getId() - 1;
+                    index = i;
                 }
             }
         }
@@ -62,9 +64,9 @@ class EmployeeBook {
 
     public int find(int id) {
         int index = -1;
-        for (Employee employee : employees) {
-            if (employee != null && id == employee.getId())
-                index = employee.getId() - 1;
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null && id == employees[i].getId())
+                index = i;
         }
         return index;
     }
