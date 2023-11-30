@@ -24,9 +24,10 @@ public class Main {
         arr.insert(sonya);
         arr.insert(jack);
         arr.insert(vladimir);
+        arr.insert(sonya);
+        arr.insert(jack);
+        arr.insert(vladimir);
 
         arr.displayInformationAboutEachDepartment();
-
-
     }
 }
