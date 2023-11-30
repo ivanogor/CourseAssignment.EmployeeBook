@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 class Employee {
     private String name;
     private int department;
@@ -41,6 +43,4 @@ class Employee {
     public void setSalary(double salary) {
         this.salary = salary;
     }
-
-
 }

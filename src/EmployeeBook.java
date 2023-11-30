@@ -1,17 +1,27 @@
+import java.util.Arrays;
+
 class EmployeeBook {
     private final Employee[] employees;
+    int numberOfEmployees;
 
 
     public EmployeeBook(int max) {
         employees = new Employee[max];
-
+        numberOfEmployees = 0;
     }
 
     public void delete(int id) {
         int index = find(id);
         if (index >= 0) {
             employees[index] = null;
+
+            for (int i = index; i < numberOfEmployees; i++) {
+                employees[i] = employees[i + 1];
+                numberOfEmployees--;
+                return;
+            }
         }
+        System.out.print(" Сотрудник не удален.");
     }
 
     public void delete(String name) {
@@ -19,19 +29,26 @@ class EmployeeBook {
         if (index >= 0) {
             employees[index] = null;
 
+            for (int i = index; i < numberOfEmployees; i++) {
+                employees[i] = employees[i + 1];
+                numberOfEmployees--;
+                return;
+            }
         }
+        System.out.print(" Сотрудник не удален.");
     }
 
     public void insert(Employee employee) {
-        boolean succes = false;
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] == null) {
-                employees[i] = employee;
-                succes = true;
-                break;
-            }
+        String phrase = "Не удалось добавить сотрудника.";
+        if (numberOfEmployees < employees.length) {
+            phrase = "Сотрудник добавлен.";
+        } else {
+            System.out.println(phrase);
+            return;
         }
-        System.out.println(succes ? "Сотрудник вставлен" : "Не удалось вставить сотрудника");
+        employees[numberOfEmployees] = employee;
+        numberOfEmployees++;
+        System.out.println(phrase);
     }
 
     public void changeSalary(String name, double newSalary) {
@@ -49,26 +66,23 @@ class EmployeeBook {
     }
 
     public int find(String name) {
-        int index = -1;
-        name = name.toLowerCase();
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] != null) {
-                String nameInBase = employees[i].getName().toLowerCase();
-                if (name.equals(nameInBase)) {
-                    index = i;
-                }
+        for (int i = 0; i < numberOfEmployees; i++) {
+            if (name.equalsIgnoreCase(employees[i].getName())) {
+                return i;
             }
         }
-        return index;
+        System.out.print("Пользователь не найден.");
+        return -1;
     }
 
     public int find(int id) {
-        int index = -1;
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] != null && id == employees[i].getId())
-                index = i;
+        for (int i = 0; i < numberOfEmployees; i++) {
+            if (id == employees[i].getId()) {
+                return i;
+            }
         }
-        return index;
+        System.out.println("Пользователь не найден.");
+        return -1;
     }
 
     public String employeeWithLowestSalaryInTheDepartment(int department) {
