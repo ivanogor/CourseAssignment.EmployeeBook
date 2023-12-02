@@ -15,8 +15,8 @@ class EmployeeBook {
             for (int i = index; i < numberOfEmployees - 1; i++) {
                 employees[i] = employees[i + 1];
                 numberOfEmployees--;
-                return;
             }
+            return;
         }
         System.out.print(" Сотрудник не удален.");
     }
@@ -29,8 +29,8 @@ class EmployeeBook {
             for (int i = index; i < numberOfEmployees; i++) {
                 employees[i] = employees[i + 1];
                 numberOfEmployees--;
-                return;
             }
+            return;
         }
         System.out.print(" Сотрудник не удален.");
     }
